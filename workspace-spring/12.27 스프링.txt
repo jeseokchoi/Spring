@@ -1,0 +1,82 @@
+스프링
+
+-스프링 MVC의 개념
+C : Controller
+함수의 기본요소
+-반환형
+-함수이름
+-매개변수
+
+-응답과정
+ request > response
+
+request > web.xml >DispatcherServlet > HandlerMapping
+> Handleradapter > method
+
+
+response
+1. redirect = 주소를 적어줘야함
+2. forword (스프링에서의 기본값) = jsp의 이름을 적어줘야함
+
+
+스프링빈은 프로젝트가 시작될때 생성이 된다
+객체가 올라갈때(미리 준비하는 속성이라서) 생성한다
+즉, 변경사항이 있으면 프로젝트를 재시작해줘야한다
+
+ModelAndView
+- response를 구성한다랑 같은 의미
+
+day01 - ex(n번)Controller 내용
+1- jsp 코드
+3- request getmapping mav을 같이 사용
+4- mav 도입 커맨드객체 도입 다수의 파라미터를 한번에 묶어서 처리
+	forward에 의해서 참조시킨다 EL태그로 참조
+
+
+@선생님 필기
+스프린 컨트롤러 메서드
+1) 반환형
+
+void : 요청 주소에 따라 viewName을 결정한다
+String : 반환되는 값을 viewName으로 결정한다
+ModelAndView : 생성자 매개변수 혹은 setViewName(String viewName)에 의해
+	       viewName 결정
+
+2) 매개변수
+
+HttpServletRequest : JSP 내장 객체 request
+HttpServletResponse : JSP 내장 객체 response
+HttpSession : JSP 내장 객체 session
+primitive, String : request.getParameter에 대응된다
+Model : request 대신 attribute를 전달하는 가벼운 객체
+커맨드 객체 : 임의의 클래스를 작성하여, 여러 파라미터를 객체로 처리할 수 있다
+
+3) 어노테이션(@)
+
+@Controller : 클래스에 지정하여 스프링 빈으로 등록함과 동시에 컨트롤러의 역할을 수행한다
+	      요청 주소에 따라 실행할 함수를 작성하는 클래스이다
+	      요청에 따른 응답을 결정할 수 있다(servlet-context -> <annotation-driven /> 이것 때문에 작동한다)
+
+@RequestMapping : 클래스 혹은 메서드에 지정하여, 어떤 요청이 왔을 때 반응할지 결정한다
+		  value와 method를 지정할 수 있으며, 다른 세부 속성도 있다
+
+@GetMapping : @RequestMapping(value="", method=RequestMethod.GET)
+@PostMapping : @RequestMapping(value="", method=RequestMethod.POST)
+@PutMapping : @RequestMapping(value="", method=RequestMethod.PUT)
+@PatchMapping : @RequestMapping(value="", method=RequestMethod.PATCH)
+@DeleteMapping : @RequestMapping(value="", method=RequestMethod.DELETE)
+
+	=== 위 5개의 단축 어노테이션은 @RequestMapping으로 변환되어 실행된다 (4.1.0)===
+
+@RequestParam : request.getParameter(), 보통 매개변수 앞에서 생략된다
+		단, 파라미터를 Map으로 처리하는 경우 반드시 명시해야 한다(HashMap으로 받을땐 절대 생략하면 안된다)
+@ModelAttributr : model.addAttribute(), 파라미터를 곧바로 model에 추가한다
+		  자주 사용되는 편은 아니다.
+
+
+ioc (inversion of control)
+제어역전 - 프로그램의 흐름 (객체의 생성 , 생명주기)을
+         개발자가 직접 제어하는 것이 아닌 외부에서 제어 및 관리해주는 것을 말한다.
+
+
+
