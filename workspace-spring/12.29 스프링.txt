@@ -1,0 +1,14 @@
+12-29일 스프링 3일차
+
+-day02_member 풀이
+1. pome.xml 환경설정(자바 버전, lib 의존성 설정), alt+f5 업데이트
+2. web.xml 환경설정(인코딩필터 체크)
+3. servlet-context 패키지명 변경
+4. 패키지 미리 만들어놓기 (service, model, repository)
+5. HomeController, MemberController 클래스 생성
+6. model 패키지 > memberDTO 생성하기
+7. 멤버필드 작성(sql테이블 참조)
+8. sevice, DAO 클래스 생성
+9. 각 클래스 어노테이션 첨부
+10. root-context > 컴포넌트 생성(스프링빈 생성작업)
+11. 각 클래스 S 붙은지 확인(스프링빈 등록여부)

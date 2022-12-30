@@ -1,0 +1,83 @@
+12.30 스프링 5일차
+
+오라클 SQL 테이블 제약조건
+number(4, 1)    1111.0
+앞의 자리는 정수 뒤에 자리는 실수를 가르킨다
+소수점 자리의 숫자를 사용할거라는 의미
+
+리다이렉트 (post > get)
+데이터를 전달하는 기능없이 주소만 바꾼다
+
+HomeController 작업 후
+다음 컨트롤러 생성전에
+DTO먼저 작업하는 걸 권장한다
+(어떤 데이터를 다룰지 지정해야하기 때문)
+
+DTO는 Modle에 생성
+DAO는 Repository에 생성
+
+
+***중요 @PathVariable 사용
+(참고) https://bepoz-study-diary.tistory.com/184
+스프링 함수 - 주소창에 파라미터 값만 노출가능, 문자열도 가능하다
+@getMapping("/view/{idx}")
+public ModelAndView view(@PathVariable("idx") int idx) {
+	// PathVariable : 요청 주소의 일부를 파라미터처럼 받아서 활용한다
+	// PathVariable을 사용하면 viewName 지정을 생략하면 안된다
+
+	ModelAndView mav = new ModelAndView("view");
+	BookDTO dto = bookService.getDTO(idx);
+	mav.addObject("dto", dto);
+	return mav;
+};
+
+
+CSS 줄바꿈 
+word-break: keep-all; 
+- 단어 단위로 줄바꿈 - 단어 단위로 줄바꿈을 해준는 속성 단어단위로 강제로 줄바꿈을 해준다
+- keep-all속성 사용시 우측에 공간이 많이 남게 되는경우가 있는데
+  text-align:justify (좌우정렬) 속성과 함께 쓰면 좌우를 정렬해 주기 때문에 좀더 보기 좋아 진다.
+
+word-break: break-all; 
+- 문자 단위로 줄바꿈 - 문자 단위로 줄바꿈을 해주는 속성 문자를 강제로 줄바꿈을 해준다.
+
+
+선생님 view페이지 참조
+<style>
+justify-content: space-between;
+양옆으로 벌린다
+
+프로젝트 복사 이름변경
+porm.xml > <artifactId>day04_book</artifactId>
+	   <name>day04_book</name>
+이름변경
+
+mapper = 함수에 1:1 맵핑된다라는 해석
+마이바티스 동적 SQL
+https://mybatis.org/mybatis-3/ko/dynamic-sql.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

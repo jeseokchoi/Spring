@@ -26,10 +26,12 @@ root-context.xml
 프로젝트 실행 후 home.jsp 실행 결과 확인하기
 
 Maven
+- xerces
 - hikariCP (4.0.3) : 오버헤드가 없는 jdbc커넥션 풀
 - ojdbc8 (최신버전)
 - MyBatis (3.5.11) : spl문을 실행하는 것을 도와주는 프로그램, while(rs.next()){} 이것을 대신 해준다
-- MyBatis Spring (3.0.1)
+- MyBatis Spring (2.1.0)
+- spring-jdbc
 - spring-orm : jdbc 코드 복사해서 이름만 변경해줘도 됨
 
 클래스를 만드는 목적
