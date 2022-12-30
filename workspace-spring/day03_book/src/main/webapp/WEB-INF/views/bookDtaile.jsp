@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="home.jsp" %>
+<%@ include file="header.jsp" %>
+
+<h3>상세페이지</h3>
 
 <table border="1">
 	<thead>
@@ -13,7 +15,8 @@
 			<th>PRICE</th>
 			<th>MEMO</th>
 			<th>SCORE</th>
-			<th>Modify</th>
+			<th>MODIFY</th>
+			<th>DELETE</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -22,11 +25,12 @@
 				<th>${dto.name }</th>
 				<th>${dto.author }</th>
 				<th>${dto.publisher }</th>
-				<th>${dto.publishdate }</th>
+				<th>${dto.publishDate }</th>
 				<th>${dto.price }</th>
 				<th>${dto.memo }</th>
 				<th>${dto.score }</th>
-				<td><a href="${cpath }/bookModify?idx=${dto.idx}"><button>수정하기</button></a></td>
+				<th><a href="${cpath }/bookModify/${dto.idx}"><button>수정하기</button></a></th>
+				<th><a href="${cpath }/delete?idx=${dto.idx}"><button>삭제하기</button></a></th>
 			</tr>
 
 	</tbody>

@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import com.itbank.model.BookDTO;
+
 @Repository
 public interface BookDAO {
 
@@ -16,13 +18,13 @@ public interface BookDAO {
 	List<BookDTO> selectList();
 
 	@Insert("insert into book3(name, name2, author, publisher, publishdate, price, memo, score) "
-			+ "values(#{name}, #{name2}, #{author}, #{publisher}, #{publishdate}, #{price}, #{memo}, #{score})")
+			+ "values(#{name}, #{name2}, #{author}, #{publisher}, #{publishDate}, #{price}, #{memo}, #{score})")
 	int insert(BookDTO dto);
 	
 	@Select("select * from book3 where idx=#{idx}")
 	BookDTO selectDTO(int idx);
 
-	@Update("update book3 set name=#{name}, name2=#{name2}, author=#{author}, publisher=#{publisher}, publishdate=#{publishdate}, price=#{price}, "
+	@Update("update book3 set name=#{name}, name2=#{name2}, author=#{author}, publisher=#{publisher}, publishDate=#{publishDate}, price=#{price}, "
 			+ "memo=#{memo}, score=#{score} where idx=#{idx}")
 	int modify(BookDTO dto);
 
@@ -30,5 +32,5 @@ public interface BookDAO {
 	int delete(int idx);
 
 	@Select("select * from book3 where name2 like ('%${name}%')")
-	BookDTO selectSearch(String name);
+	List<BookDTO> selectSearch(String name);
 }

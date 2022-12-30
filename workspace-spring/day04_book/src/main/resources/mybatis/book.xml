@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+			"-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<mapper namespace="com.itbank.repository.BookDAO">
+
+	<!-- List<BookDTO> select() -->
+	<select id="selectList" resultType="book">
+		select * from book3 order by idx
+	</select>
+	
+	<!-- List<BookDTO> selectSearch(String name) -->
+	<select id="selectSearch" parameterType="String" resultType="book">
+		select * from book3 
+			where name2 like ('%${name}%')
+	</select>
+	
+	<insert id="insert" parameterType="book">
+		insert into book3 values
+			(
+				book3_seq.nextval, 
+				#{name}, 
+				#{name2}, 
+				#{author}, 
+				#{publisher}, 
+				#{publishDate}, 
+				#{price}, 
+				#{memo}, 
+				#{score}
+			)
+	</insert>
+	
+	<select id="selectDTO" resultType="book">
+		select * from book3 where idx=#{idx}
+	</select>
+	
+	<update id="modify" parameterType="book">
+		update book3 
+			set 
+				name = #{name}, 
+				name2 = #{name2}, 
+				author = #{author}, 
+				publisher = #{publisher}, 
+				publishDate = #{publishDate}, 
+				price = #{price},
+				memo = #{memo}, 
+				score = #{score} 
+			where 
+				idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="book">
+		delete from book3 where idx = #{idx}
+	</delete>
+	
+</mapper>			

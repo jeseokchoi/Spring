@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="home.jsp" %>
+<%@ include file="header.jsp" %>
 
 <h1>Book 테이블 목록</h1>
 <hr>
@@ -11,12 +11,8 @@
 		<th>NAME</th>
 		<th>AUTHOR</th>
 		<th>PUBLISHER</th>
-		<th>PUBLISHDATE</th>
 		<th>PRICE</th>
-		<th>MEMO</th>
-		<th>SCORE</th>
 		<th>조회</th>
-		<th>삭제</th>
 	</tr>
 	<tbody>
 		<c:forEach var="dto" items="${list }">
@@ -25,12 +21,8 @@
 				<th>${dto.name }</th>
 				<th>${dto.author }</th>
 				<th>${dto.publisher }</th>
-				<th>${dto.publishdate }</th>
 				<th>${dto.price }</th>
-				<th>${dto.memo }</th>
-				<th>${dto.score }</th>
-				<th><a href="${cpath }/bookDtaile?idx=${dto.idx}"><button>상세보기</button></a></th>
-				<th><a href="${cpath }/delete?idx=${dto.idx}"><button>삭제하기</button></a></th>
+				<th><a href="${cpath }/bookDtaile/${dto.idx}"><button>상세보기</button></a></th>
 			</tr>
 		</c:forEach>
 	</tbody>
