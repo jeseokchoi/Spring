@@ -1,0 +1,51 @@
+1월 3일 스프링
+
+메이븐 라이브러리 추가(파일업로드 구현시 필요한 라이브러리)
+commons io(최신버전) 
+commons fileupload(최신버전)
+
+servlet-context
+- 요청에 관련된 여러 기능을 수행하는 특수한 것 
+
+root-context
+- 기능에 관련된 여러가지를 수행(?)
+
+MultipartFile
+- 
+
+*윈도우, 리눅스 경로구분자
+		windows			Linux
+경로 구분자	\			/
+		(문자열 규칙 때문에 \\)
+
+경로 나열자	;			:
+
+변수 참조자	%VAR%			$VAR
+================================================
+
+윈도우 환경 변수 설정 예시
+	PATH=%JAVA_HOME%\bin;%CATALINA_HOME%\bin;
+
+리눅스 환경 변수 설정 예시
+	PATH=$PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin:
+
+***
+- 중첩 커맨드 객체
+멀티파트 파일을 처리
+포이치, 람다식
+스프링빈의 생성자을 직접 작성해서 없으면 만들어라
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
