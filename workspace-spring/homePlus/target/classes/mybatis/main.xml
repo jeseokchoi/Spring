@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC
+			"-//mybatis.org//DTD Config 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-config.dtd">
+			
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="useGeneratedKeys" value="false"/>
+		<setting name="mapUnderscoreToCamelCase" value="false"/>
+		<!-- CamelCase란?
+				user_name -> userName 알아서 바꾼다 valuse="false" = 바꾸지마라 라는 뜻
+		 -->
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.itbank.model.HomePlusDTO" alias="homePlus" />
+	</typeAliases>
+	
+</configuration>	

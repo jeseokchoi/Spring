@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+			"-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<mapper namespace="com.itbank.repository.HomePlusDAO">
+
+	<select id="selectList" resultType="HomePlus">
+		select * from homePlus order by idx
+	</select>
+
+	<insert id="insert" parameterType="HomePlus">
+		insert into homeplus values
+		(
+			homeplus_seq.nextval, 
+		    #{category}, 
+		    #{productName}, 
+		    #{price}, 
+		    #{score}, 
+		    #{thumbnail},
+		    #{reviewImage},
+		    sysdate
+		  )
+	</insert>
+	
+	<select id="selectDTO" resultType="HomePlus">
+		select * from homePlus where idx=#{idx}
+	</select>
+	
+	<update id="modify" parameterType="HomePlus">
+		update homePlus
+			set
+				category = #{category},
+				productName = #{productName},
+				price = #{price},
+				score = #{score},
+				thumbnail = #{thumbnail},
+				reviewImage = #{reviewImage},
+				registDate = #{registDate}
+			where
+				idx = #{idx}
+	</update>
+
+</mapper>
