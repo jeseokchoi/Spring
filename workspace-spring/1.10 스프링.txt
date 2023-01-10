@@ -1,0 +1,39 @@
+인터셉터 (request를 가로채는 객체)
+preHandle
+-여러 컨트롤러에 일관적으로 적용되는 if문이라고 볼 수 있다
+postHandel
+afteCompletion
+
+01.11 수업예정
+===게시판 v0.1===
+댓글/첨부파일 없는 회원제 게시판 (목록/읽기/검색은 가능, 쓰기/수정/삭제는 회원만)
+
+- 대문 페이지
+회원
+	-가입
+	-로그인
+	-마이페이지
+	-정보수정
+	-회원탈퇴
+
+게시판
+	-글목록
+	-글쓰기
+	-글검색
+	-글읽기
+	-글수정
+	-글삭제
+------------------------------------------------------------------------------------
+-게시판 테이블
+
+create table board(
+	idx		number		...,
+	write		varchar2(100)	not null,
+	...
+
+	constraint fk_board_member5	-- fk_board_member5 이름으로 제약조건 생성
+	foreign key(writer)		-- 외래키 제약조건을 writer 컬럼에 지정
+	references member5(userid)	-- 참조하는 대상은 member5 테이블의 userid
+    	on delete cascade		-- member5를 삭제하면 board도 같이 삭제
+);
+	

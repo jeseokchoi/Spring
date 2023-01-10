@@ -1,0 +1,29 @@
+0) 환경설정
+- pom.xml (버전, 의존성)
+- web.xml (인코딩 필터, web-app version)
+- root-context.xml (DB, 기타)
+- servlet-context.xml (파일업로드, resources, mapping...)
+
+1) 요청 (주소, 메서드)
+		<- 1) preHandle
+    2) Controller 함수 (파라미터)
+
+        3) Service 함수
+
+            4) DAO 함수 (인터페이스)
+
+                5) myBatis Mapper (***.xml)
+                6) <select resultType="" parameterType="">
+
+            7) DAO에서 Service로 반환
+
+        8) Service에서 Controller로 반환
+
+    9) Controller에서 DB Data를 받아서 ModelAndView에 넘김
+	<- 2) postHandle
+10) 응답 (viewName or redirect, Object)
+	<- 3) afterCompletion	
+
+1),2),3)- 인터셉터(request를 가로채는 객체)
+-작동 시점이 다르다
+
