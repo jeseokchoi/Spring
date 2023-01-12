@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itbank.repository.BoardDAO">
+	
+	<select id="selectList" resultType="board" parameterType="hashmap">
+		select * from board 
+			order by idx desc
+			offset #{offset} rows
+			fetch first #{perPage} rows only
+	</select>
+	
+	<select id="selectSearchList" parameterType="String" resultType="board">
+		select * from board
+			where
+				title like '%${keyword}%'
+	</select>
+	
+	<insert id="addList" parameterType="board">
+		insert into board 
+		values
+			(board_seq.nextval,
+			#{writer}, 
+			#{title}, 
+			#{content},
+			#{views}, 
+			sysdate
+			)
+	</insert>
+	
+	<update id="update" parameterType="int">
+		update board 
+			set 
+				views = views + 1 
+			where 
+				idx = #{idx}
+	</update>
+	
+	<select id="getList" resultType="board">
+		select * from board where idx = #{idx}
+	</select>
+	
+	
+	<select id="getContent" resultType="board">
+		select * from board where idx = #{idx}
+	</select>
+	
+	<update id="listModify" parameterType="board">
+		update board
+			set 
+				writer = #{writer}, 
+				title = #{title}, 
+				content = #{content} 
+			where 
+				idx = #{idx}
+	</update>
+	
+	<delete id="listDelete" parameterType="board">
+		delete board where idx=#{idx}
+	</delete>
+	
+	<select id="selectBoardCount" resultType="int">
+		select count(*) from board
+	</select>
+
+</mapper>

@@ -1,0 +1,161 @@
+@charset "utf-8";
+
+.header{
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+.header_container{
+    display: flex;
+    margin: auto;
+    width: 1170px;
+}
+.logo {
+    display: flex;
+    height: 92px;
+    width: 73%;
+    line-height: 92px;
+}
+.login {
+    display: flex;
+    width: 10px;
+}
+.login > .log > p {
+    width: 40px;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-right: 15px;
+}
+.login > .join > p {
+    width: 75px;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.login > .log > .join {
+    width: 40px
+}
+.category{
+    display: flex;
+}
+.mains{
+    margin: auto;
+    width: 1020px;
+}
+.row{
+    margin-bottom: 50px;
+}
+ul {
+    margin: auto;
+    padding-left: 0;
+
+    border-top: 1px solid black;
+    background-color: white;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+
+    width: 1020px;
+    height: 45px;
+
+    display: flex;
+}
+ul > li {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+ul > li:hover {
+    background: skyblue;
+}
+ol{
+    z-index: 1;
+    margin-top: 10px;
+    margin-left: -1px;
+    display: none;
+    position: absolute;
+    border: 1px solid black;
+}
+ol > li {
+    width: 100px;
+}
+ul > li:hover > ol {
+    display: block;
+    z-index: 1;
+}
+li {
+    padding: 10px 0;
+}
+ul, ol {
+    list-style: none;
+
+}
+.category > ul > li > ol {
+    margin-top: 35px;
+    
+}
+li:hover {
+    cursor: pointer;
+}
+.side {
+    position: fixed;
+    top: 146px;
+    right: 240px;
+}
+.main_img{
+    width: 1020px;
+}
+.row > .item_front{
+    display: flex;
+    margin-left: 540px;
+}
+.row > .main_arrow{
+    display: flex;
+}
+.item {
+    display: flex;
+    margin-bottom: 50px;
+}
+.item > .content {
+    font-size: 12px;
+}
+.items {
+    display: flex;
+    margin-bottom: 50px;
+}
+.items > .content1 {
+    font-size: 12px;
+    margin: 0 30px;
+}
+.items > .content1 > .content_text1{
+    display: flex;
+}
+.content_text2{
+    display: flex;
+}
+.items2{
+    display: flex;
+}
+.items2 > .content2 {
+    font-size: 12px;
+}
+.footer_wrap{
+    background-color: grey;
+    color: aliceblue;
+    padding-left: 150px;
+    margin-top: 80px;
+}
+.container{
+    display: flex;
+    margin: auto;
+    width: 1170px;
+}
+.container > .footer_brand {
+    margin: 0 45px;
+}
+.container > .footer_brand > p {
+    font-size: 12px;
+}
+

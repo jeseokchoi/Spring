@@ -1,0 +1,57 @@
+23.01.12
+페이징
+
+총 게시글의 개수		216	(select count(*) from board)
+한 페이지 당 출력 개수	10	private final int perPage = 10;
+페이지 개수		22	216 / 10 = 21
+				21 += 216 % 10 == 0 ? 0 : 1;
+				22
+
+				for(int i = 1; i <= 22; i++) ...
+	요청받은 페이지(p)	시작번호(s)	끝번호	
+	1		1		10
+	2		11		20
+	3		21		30
+	4		31		40
+	...
+	21		
+*규칙성
+s = p * 10 - 9
+
+함수식 풀이
+int getStart(int page){
+	return page * 10 - 9;
+}
+=====================================================================
+서브쿼리 사용 (oracle DB 11g 까지 사용하는 구문)
+
+select * from (
+	select rownum as st, A.* from ( 
+		select * from board order by idx desc
+	) A where rownum <= #{ed}
+) where st >= #{st};
+	 		
+=====================================================================
+(oracle DB 12c 부터 사용하는 구문)
+
+select * from board
+	order by idx desc
+	offset #{offset} rows		-- 첫 줄에서 건너뛸 개수(offset: 기본은 0)
+	fetch first #{row} rows only;	-- 건너뛴 이후 불러올 레코드의 수
+
+=====================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
