@@ -1,0 +1,105 @@
+=== 게시판 v0.2 === (day11_board2)
+
+댓글/첨부파일 없는 회원제 게시판 (목록/읽기/검색은 가능, 쓰기/수정/삭제는 회원만)
+
+- 대문 페이지
+회원	(member5 테이블 사용)
+	- 가입			
+	- 로그인
+	- 마이페이지
+	- 정보수정
+	- 회원탈퇴
+
+게시판	(board2 테이블 생성)
+	- 글목록
+	- 글쓰기
+	- 글검색
+	- 글읽기
+	- 글수정
+	- 글삭제
+
+=============================================================================
+
+create table board2 (
+    idx		number		default board2_seq.nextval primary key,
+    writer	varchar2(100)	not null,
+    title	varchar2(100)	not null,
+    content 	varchar2(2000)	not null,
+    writeDate	date		default sysdate,
+    ipaddr	varchar2(30)	not null,
+    viewCount	number		default 0,
+    uploadFile	varchar2(255)	,
+
+    constraint fk_borad2_member5 	-- fk_board2_member5 이름으로 제약조건 생성
+    foreign key(writer)			-- 외래키 제약조건을 writer 컬럼에 지정
+    references member5(userid)		-- 참조하는 대상은 member5 테이블의 userid
+    on delete cascade			-- member5를 삭제하면 board도 같이 삭제
+);
+
+
+=============================================================================
+
+
+회원	(member5 테이블 사용)
+	- 가입		/member/join	
+	- 로그인		/member/login
+			/member/logout
+	- 마이페이지	/member/mypage
+	- 정보수정	/member/modify
+	- 회원탈퇴	/member/withdraw
+
+게시판	(board1 테이블 생성, idx:기본키, writer:외래키, title, content...)
+	- 글목록		/board/list
+	- 글쓰기		/board/write	
+	- 글검색		/board/list/{keyword}
+	- 글읽기		/board/view/{idx}
+	- 글수정		/board/modify/{idx}
+	- 글삭제		/board/delete/{idx}
+
+
+
+============================
+
+
+create sequence board2_seq
+	start with 1000
+	maxvalue 99999999
+	increment by 1
+	nocycle
+	nocache;
+
+create table board2 (
+    idx		    number		    default board2_seq.nextval primary key,
+    writer	    varchar2(100)	not null,
+    title	    varchar2(100)	not null,
+    content 	varchar2(2000)	not null,
+    writeDate	date		    default sysdate,
+    ipaddr	    varchar2(30)	not null,
+    viewCount	number		    default 0,
+    uploadFile	varchar2(255)	,
+
+    constraint fk_borad2_member5 	-- fk_board2_member5 이름으로 제약조건 생성
+    foreign key(writer)			-- 외래키 제약조건을 writer 컬럼에 지정
+    references member5(userid)		-- 참조하는 대상은 member5 테이블의 userid
+    on delete cascade			-- member5를 삭제하면 board도 같이 삭제
+);
+desc board2;
+select * from board2 order by idx;
+select * from member5 order by idx;
+commit;
+
+
+insert into board2 values 
+        (board2_seq.nextval, 'admin', '테스트입니다', 
+        '더미 데이터 입니다. 지각 하지마세요. 제석아', 
+        sysdate, 0, 0, '문상7.png');
+        
+insert into board2 values 
+        (board2_seq.nextval, 'admin2', '테스트2 입니다', 
+        '더미 데이터 입니다. 비가 엄청 오는 날입니다.', 
+        sysdate, 0, 0, '문상4.png');  
+        
+insert into board2 values 
+        (board2_seq.nextval, 'dodoro914', '테스트3 입니다', 
+        '더미 데이터 입니다. 곧 점심시간 입니다. 뭐 먹죠?', 
+        sysdate, 0, 0, '문상10.png');  
