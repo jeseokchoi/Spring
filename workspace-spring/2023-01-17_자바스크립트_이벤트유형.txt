@@ -1,0 +1,30 @@
+
+1) 인라인 이벤트
+<button class="test" onclick="test()">버튼</button>
+
+- 비추천
+- this 혹은 event 사용이 까다롭다
+- 하나의 객체에 하나의 이벤트만 넣을 수 있다
+
+2) 스크립트 on...
+const button = document.querySelector('button.test')
+button.onclick = function() { ... }
+
+- 간단하게 사용할 수 있다
+- this혹은 event 사용 가능
+- 하나의 객체에 하나의 이벤트만 넣을 수 있다
+
+3) addEventListener()
+const button = document.querySelector('button.test')
+
+function test() {
+    ...
+}
+
+button.addEventListener('click', test)
+button.addEventListener('click', test2)
+button.addEventListener('click', test3)
+
+- 구문이 다소 복잡할 수 있다
+- this, event 사용가능
+- 하나의 객체에 여러 이벤트를 중복하여 부여할 수 있다
