@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #root {
+            border: 2px solid black;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .item, .title {
+            font-size: 19px;
+            border: 1px solid gray;
+            display: flex;
+        }
+        .item > div {
+            padding: 5px 10px;
+            flex: 1;
+        }
+        .title > div {
+            padding: 5px 10px;
+            flex: 1;
+            background-color: gray;
+            border: 1px solid black;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <h1>8_화면구현연습</h1>
+    <hr>
+
+    <div id="root"></div>
+
+    <script>
+        const root = document.getElementById('root')
+        // arr의 데이터를 7번 코드와 같은 방식으로 화면에 반영하세요
+        const arr = [
+            { name: '이지은', kor: 100, eng: 99, mat: 87 },
+            { name: '문상훈', kor: 99, eng: 79, mat: 33 },
+            { name: '주현영', kor: 30, eng: 23, mat: 99 },
+            { name: '고수', kor: 60, eng: 50, mat: 88 },
+            { name: '현빈', kor: 10, eng: 40, mat: 22 },
+        ]
+        console.log(arr)
+
+        const title = document.createElement('div')
+        title.className = 'title'
+        title.innerHTML += '<div class="name">이름</div>'
+        title.innerHTML += '<div class="name">국어</div>'
+        title.innerHTML += '<div class="name">영어</div>'
+        title.innerHTML += '<div class="name">수학</div>'
+        title.innerHTML += '<div class="name">합계</div>'
+        title.innerHTML += '<div class="name">평균</div>'
+
+        root.appendChild(title)
+
+        arr.forEach(dto => {
+            const item = document.createElement('div')
+            const sum = dto.kor + dto.eng + dto.mat
+            const avg = (sum) / 3
+            
+            const name = '<div class="name">' + dto.name + '</div>'     // 앞의 div는 style을 잡기위한 부분이다
+            const kor = `<div class="kor">${dto.kor}</div>`
+            const eng = `<div class="eng">${dto.eng}</div>`
+            const mat = `<div class="mat">${dto.mat}</div>`
+            const hap =`<div class="sum"> ${sum} </div>`
+            const hop =`<div class="avg"> ${avg.toFixed(2)} </div>`
+
+            item.className = 'item'
+            item.innerHTML += name
+            item.innerHTML += kor
+            item.innerHTML += eng
+            item.innerHTML += mat
+            item.innerHTML += hap
+            item.innerHTML += hop
+
+            root.appendChild(item)
+        })
+
+
+    </script>
+    
+</body>
+</html>

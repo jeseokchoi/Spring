@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_type.html</title>
+</head>
+<body>
+
+    <h1>1_type.html</h1>
+    <hr>
+
+    <ol>
+        <li>boolean : 참/거짓</li>
+        <li>number : 숫자</li>
+        <li>string : 문자열</li>
+        <li>function : 함수</li>
+        <li>array : 배열</li>
+        <li>object : 객체</li>
+    </ol>
+
+    <script>
+        // 변수 선언 키워드는 자료형이 아니다
+
+        var s1 = 'Hello';   // 지역변수 구분이 모호하다
+        let s2 = 3;         // ES6 이후 변수 선언, 값을 변경시킬 수 있다
+        const s3 = 1.2;     // ES6 이후 변수 선언, 값을 변경시킬 수 없다
+
+        s1 = 'Bye'
+        s2 = 4;
+        // s3 = 1.3;
+
+        // 자료형은 존재한다
+        console.log('콘솔 창에 내용을 출력');    // sysout
+        console.log(typeof(s1)); // string
+        console.log(typeof(s2)); // number
+        console.log(typeof(s3)); // number
+
+        const s4 = ['짱구', '유리', '철수'];     
+        const s5 = {
+            name: '이지은',
+            age: 31
+        };
+
+        console.log(typeof(s4))
+        console.log(typeof(s5))
+
+        console.log({s1: s1})
+        console.log({s2: s2})
+        console.log({s3: s3})
+        console.log({s4: s4})
+        console.log({s5: s5})
+
+        console.log(s5.name, s5.age)
+
+        console.log(document.body)
+
+        function s6() {
+            alert('s6')
+        }
+
+        console.log({s6: s6})
+        console.log(typeof(s6))
+
+        const s7 = function() {
+            console.log('s7 을 호출함')
+        }
+        s7() // s7변수에 담긴 함수를 호출하여 실행한다
+
+        const s8 = () => {
+            console.log('s8 을 호출함')
+        }
+        // () => {}     // 화살표 함수, arrow function
+        // () -> {}     // lambda in Java
+        s8()
+
+        const s9 = true
+        const s10 = false
+
+        console.log(typeof(s9))
+    </script>
+    
+</body>
+</html>

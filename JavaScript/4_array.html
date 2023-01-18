@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4_array.html</title>
+</head>
+<body>
+    <h1>4_array.html</h1>
+    <hr>
+
+    <div id="root">
+        <div class="human">
+            <div class="name">유재석</div>
+            <div class="age">50</div>
+        </div>
+        <div class="human">
+            <div class="name">신동엽</div>
+            <div class="age">51</div>
+        </div>
+        <div class="human">
+            <div class="name">강호동</div>
+            <div class="age">52</div>
+        </div>
+    </div>
+
+    <script>
+        // 1) 자바스크립트의 배열은 다양한 내장함수를 가지고 있다
+        // 2) 자바스크립트의 객체는 형태가 정해지지 않은 경우도 있다
+        // 3) 객체를 묶은 배열에 대해 여러 함수를 활용할 수 있다
+        // 4) DOM요소를 불러와서 배열로 변환할 수 있다
+
+        function show(ob) {
+            console.log(ob.name, '의 나이는', ob.age, '살입니다')
+        }
+
+        const arr = [
+            {name: '이지은', age: 31},
+            {name: '홍진호', age: 42},
+            {name: '코난', age: 10},
+            {name: '나단비', age: 5},
+        ]
+
+        for(let i = 0; i < arr.length; i++) {
+            const dto = arr[i]
+            show(dto)
+        }
+        console.log('====================')
+        arr.forEach(dto => show(dto))
+
+    </script>
+    
+    <script>
+        // 태그를 읽어서 자바스크립트 배열로 변환하고 각각 출력하기
+        function convert(humanList) {   // nodeList는 배열이 아니라 함수가 부족함
+            const arg = Array.from(humanList)   // nodeList -> Array
+            const t = arg.map(element => {      // Array.map(기존 요소로 새로운 배열 구성)
+                const ob = {
+                    name: element.querySelector('.name').innerText,
+                    age: +element.querySelector('.age').innerText
+                }
+                return ob
+            })
+            return t    // 새로운 배열을 반환
+        }
+
+        const humanList = document.querySelectorAll('.human')
+        const humanArray = convert(humanList)
+
+        humanArray.forEach(e => console.log(e))
+    </script>
+
+</body>
+</html>

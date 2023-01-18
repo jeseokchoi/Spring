@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_control.html</title>
+</head>
+<body>
+    <h1>2_control.html</h1>
+    <hr>
+
+    <script>
+        // 제어문 : if, switch ~ case, while, for, 
+        //          break, continue, return
+        
+        let cnt = 0
+        while(1) {  // 숫자를 조건으로 사용할 수 있다
+                    // boolean 자료형이 있지만, 숫자도 가능(C)
+            console.log(cnt++)
+            if(cnt == 100) {
+                break
+            }
+        }
+
+        for(let i = 0; i < 5; i++) {    // int -> let
+            console.log(i)
+        }
+    </script>
+</body>
+</html>
