@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        nav > ul {
+            display: flex;
+            list-style: none;
+            border: 1px solid black;
+            padding: 0;
+        }
+        .menu {
+            flex: 1;
+            text-align: center;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .menu:hover {
+            background-color: chocolate;
+            color: white;
+            font-weight: bold;
+        }
+
+
+        section {
+            position: relative;
+        }
+        section > article {
+            position: absolute;
+            border: 1px solid black;
+            width: 100%;
+            display: none;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        section > article.selected {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>11_화면전환예시.html</h1>
+    <hr>
+
+    <nav>
+        <ul>
+            <li class="menu">메뉴1</li>
+            <li class="menu">메뉴2</li>
+            <li class="menu">메뉴3</li>
+            <li class="menu">메뉴4</li>
+        </ul>
+    </nav>
+
+    <section>
+        <article class="selected"><h3>화면1</h3></article>
+        <article><h3>화면2</h3></article>
+        <article><h3>화면3</h3></article>
+        <article><h3>화면4</h3></article>
+    </section>
+
+    <script>
+        // i번째 메뉴를 클릭하면, i번째 화면만 나타나야 한다
+        const menuArray = Array.from(document.querySelectorAll('.menu'))
+        const articleList = document.querySelectorAll('section > article')
+
+        // 각 메뉴를 클릭했을 때 실행될 함수를 작성한다
+        function clickHandler(event) {
+            // alert(event.target.innerText) 클릭시 팝업생성
+            const index = menuArray.indexOf(event.target)
+            const article = articleList[index]
+
+            articleList.forEach(a => a.classList.remove('selected'))
+
+            article.classList.add('selected')
+        }
+
+        // 모든 메뉴 요소에 대해서 위 함수를 클릭 이벤트로 연결한다
+        menuArray.forEach(menu => menu.onclick = clickHandler)
+                                    // onmouseover(마우스를 올리면)도 사용가능
+
+    </script>
+    
+</body>
+</html>

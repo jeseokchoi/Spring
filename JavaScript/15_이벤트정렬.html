@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15_이벤트정렬.html</title>
+</head>
+<body>
+
+    <h1>14_이벤트정렬.html</h1>
+    <hr>
+
+    <p>
+        <button id="asc">오름차순</button>
+        <button id="desc">내림차순</button>
+    </p>
+    <div id="root">
+        <div class="item">2</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">4</div>
+        <div class="item">6</div>
+    </div>
+
+    <script>
+        // root의 내부 태그를 제거하지 않고서도 정렬을 하려면 어떻게?
+        const root = document.getElementById('root')
+        
+        function dataSort(event) {
+            const elementArray = Array.from(document.querySelectorAll('.item'))
+            if(event.target.id == 'asc') {
+                elementArray.sort((a, b) => +a.innerText - +b.innerText)
+            }
+            if(event.target.id == 'desc') {
+                elementArray.sort((a, b) => +b.innerText - +a.innerText)
+            }
+            elementArray.forEach(e => root.appendChild(e))
+            // 같은 요소가 있으면 마지막으로 순서를 돌린다
+        }
+
+        document.querySelectorAll('button').forEach(btn => btn.onclick = dataSort)
+    </script>
+
+
+    
+</body>
+</html>

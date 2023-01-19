@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>12_이벤트강제중지.html</h1>
+    <hr>
+
+    <p>
+        <a href="https://www.google.com"><button>Google</button></a>
+    </p>
+
+    <form action="https://search.naver.com/search.naver">
+        <input type="search" name="query" placeholder="네이버 검색">
+        <input type="submit" value="검색">
+    </form>
+
+    <script>
+        // a는 그냥 클릭하면 페이지가 이동된다
+        const a = document.querySelector('a')
+        a.onclick = function(event) {
+            event.preventDefault()  // 이벤트의 기본 작동을 막는다
+            if(confirm('구글로 ㄱㄱ?')) {
+                location.href = event.target.parentNode.href
+            }
+        }
+
+        // form 태그는 submit하면 새로운 페이지로 요청을 전송한다
+        const form = document.querySelector('form')
+        form.onsubmit = function(event) {
+            event.preventDefault()
+            const keyword = document.querySelector('input[type="search"]').value
+            console.log(keyword, '검색안함')
+
+            document.querySelector('input[type="search"]').value = '카즈하'
+            form.submit()       // 현재 상태의 form을 제출한다
+        }
+
+    </script>
+    
+</body>
+</html>

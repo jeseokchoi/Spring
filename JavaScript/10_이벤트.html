@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        td, th{
+            padding: 5px 10px;
+            border: 1px solid gray;
+            font-size: 15px;
+        }
+        .black {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>10_이벤트.html</h1>
+    <hr>
+
+    <table>
+        <tr>
+            <td>이벤트 대상</td>
+            <td>button</td>
+            <td>element 중에서 동작에 의해 이벤트 처리를 부여받을요소</td>
+        </tr>
+        <tr>
+            <td>이벤트 리스너</td>
+            <td>click</td>
+            <td>element에 특정 동작이 감지되는지, 감시하는 요소</td>
+        </tr>
+        <tr>
+            <td>이벤트 핸들러</td>
+            <td>function handler()</td>
+            <td>리스너에 의해 동작이 감지되면 실행할 함수</td>
+        </tr>
+    </table>
+
+
+    <p>
+        <button id="btn1">버튼1</button>
+        <span id="span1"></span>
+    </p>
+
+    <script>
+        // btn1 을 클릭하면 span1에 글자가 들어가는 이벤트 구성하기
+        // 1) 이벤트 대상을 불러온다
+        const btn1 = document.getElementById('btn1')
+
+        // 2) 이벤트 함수를 작성한다
+        function btn1Handler(){
+            const span1 = document.getElementById('span1')
+            span1.innerText = '이벤트 작동'
+        }
+
+        // 3) 만들어진 이벤트 함수를 이벤트 대상의 특정 리스너에 연결한다
+        // 이때, 함수를 지금 당장 실행하는 것이 아니므로, ()는 붙이지 않는다
+        btn1.onclick = btn1Handler
+
+    </script>
+
+    <p>
+        <button id="btn2">버튼2</button>
+        <span id="span2"></span>
+    </p>
+
+    <script>
+        // 자바스크립트의 화살표 함수는 이름 없는 함수를 즉석에서 만들수 있다
+        // 화살표 함수를 변수에 저장하면 변수 이름으로 함수를 호출할 수 있다
+
+        // 이벤트 대상을 불러와서
+        const btn2 = document.getElementById('btn2')
+
+        // 리스너에 함수를 연결한다
+        btn2.onclick = function(){
+            const span2 = document.getElementById('span2')
+            span2.innerText = '이벤트 작동'
+        }
+    </script>
+
+    <p>
+        <button id="btn3">버튼3</button>
+    </p>
+
+    <script>
+        // 이벤트 핸들러 함수의 매개변수에 event를 받아서
+        // 이벤트 발생에 대한 내용을 객체로 처리할 수 있다
+        const btn3 = document.getElementById('btn3')
+        btn3.onclick = function(event){
+            console.log(event)
+            console.log(event.target)
+            console.log(event.target == btn1)
+            console.log(event.target == btn2)
+            console.log(event.target == btn3)
+
+            if(event.target.classList.contains('black') == false){
+                event.target.innerText = '구매'
+                event.target.classList.add('black')
+            }
+            else {
+                event.target.innerText = '취소'
+                event.target.classList.remove('black')
+            }
+        }
+    </script>
+
+    <p>
+        <button id="btn4" class="btn">버튼4</button>
+        <button id="btn5" class="btn">버튼5</button>
+        <button id="btn6" class="btn">버튼6</button>
+    </p>
+
+    <script>
+        // 클래스가 btn인 모든 요소를 불러와서
+        const btnList = document.querySelectorAll('.btn')
+
+        // 리스트의 각 요소를 btn이라고 할때
+        btnList.forEach(btn => {
+            btn.onclick = (event) => {  // 각 btn을 클릭하면
+                // 클래스 포함여부에 따라 클래스를 추가/제거 한다
+                if(event.target.classList.contains('black'))
+                    event.target.classList.remove('black')
+                    else
+                        event.target.classList.add('black')
+            }   // 매개변수가 1개라서 괄호를 생략할 수 있다
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title {
+            font-size: 25px;
+            cursor: pointer;
+        }
+        .content {
+            border: 1px solid black;
+            box-sizing: border-box;
+            z-index: 1;
+
+            padding: 0;
+            height: 0;
+            opacity: 0;
+            transition-duration: 0.5s;
+        }
+        .content.selected {
+            height: auto;
+            padding: 20px;
+            opacity: 1;
+            transition-duration: 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>13_접기펼치기.html</h1>
+    <hr>
+
+    <ul>
+        <li>
+            <div class="title">제목1</div>
+            <div class="content">내용1</div>
+        </li>
+        <li>
+            <div class="title">제목2</div>
+            <div class="content">내용2</div>
+        </li>
+        <li>
+            <div class="title">제목3</div>
+            <div class="content">내용3</div>
+        </li>
+        <li>
+            <div class="title">제목4</div>
+            <div class="content">내용4</div>
+        </li>
+    </ul>
+    
+    <script>
+        const titleArray = Array.from(document.querySelectorAll('.title'))
+        const contentList = document.querySelectorAll('.content')
+
+        function clickHandler(event) {
+            const i = titleArray.indexOf(event.target)
+            const content = contentList[i]
+            
+            if(content.classList.contains('selected')) {
+                content.classList.remove('selected')
+                return   // 특정 조건에 의해 이벤트 함수를 강제로 중단할 수도 있다
+            }
+
+            contentList.forEach(c => c.classList.remove('selected'))
+            content.classList.add('selected')
+        }
+
+        titleArray.forEach(t => t.onclick = clickHandler)
+    </script>
+
+</body>
+</html>
