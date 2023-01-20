@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .wrap {
+            display: flex;
+        }
+        .left {
+            flex: 1;
+            padding: 10px;
+            overflow: hidden;
+            font-size: 20px;
+        }
+        .left p label {
+            user-select: none;
+        }
+        .left p input[type="checkbox"] {
+            margin-right: 20px;
+        }
+        .right {
+            flex: 4;
+            padding: 10px;
+        }
+        #column {
+            background-color: lightpink;
+            font-weight: bold;
+            text-align: center;
+        }
+        #items {
+            height: 80vh;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .item {
+            display: flex;
+        }
+        #items > .item:hover {
+            background-color: #eee;
+            cursor: pointer;
+        }
+        .item > div {
+            flex: 1;
+            padding: 5px 10px;
+            border: 1px solid black;
+        }
+        .item > div:first-child {
+            flex: 3;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>19_정렬 및 필터 연습.html</h1>
+    <hr>
+    <div id="root">
+        <div class="wrap">
+            <div class="left">
+                <fieldset>
+                    <p><label><input type="checkbox" name="priceFilter" value="0"><span>0 ~ 10,000</span></label></p>
+                    <p><label><input type="checkbox" name="priceFilter" value="1"><span>10,000 ~ </span></label></p>
+                    <p><label><input type="checkbox" name="priceFilter" value="2"><span>20,000 ~ </span></label></p>
+                    <p><label><input type="checkbox" name="priceFilter" value="3"><span>30,000 ~ </span></label></p>
+                    <p><label><input type="checkbox" name="priceFilter" value="4"><span>40,000 ~ </span></label></p>
+                </fieldset>
+            </div>    
+            <div class="right">
+                <div id="column">
+                    <div class="item">
+                        <div class="name">이름</div>
+                        <div class="price">가격</div>
+                        <div class="salePrice">할인가격</div>
+                        <div class="salesCount">누적판매량</div>
+                        <div class="grade">점수</div>
+                        <div class="reviewCount">리뷰 수</div>
+                    </div>
+                </div>
+                <div id="items"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="19.js"></script>
+    <script>
+        const items = document.getElementById('items')
+
+        dataList.forEach(data => {
+            const item = `
+            <div class="item">
+                <div class="name">${data.name}</div>
+                <div class="price">${data.price}</div>
+                <div class="salePrice">${data.salePrice}</div>
+                <div class="salesCount">${data.salesCount}</div>
+                <div class="grade">${data.grade}</div>
+                <div class="reviewCount">${data.reviewCount}</div>
+            </div>`
+            items.innerHTML += item
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #root {
+            border: 2px solid black;
+            width: 500px;
+        }
+        .item {
+            display: flex;
+        }
+        .item > div {
+            padding: 5px 10px;
+            border: 1px solid grey;
+            flex: 1;
+        }
+        .column {
+            background-color: #dadada;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>18_필터</h1>
+    <hr>
+
+    <div id="filter">
+        <p>
+            <label><input type="checkbox" name="남성">남성</label>
+            <label><input type="checkbox" name="여성">여성</label>
+        </p>
+    </div>
+
+    <div id="root">
+        <div class="column">
+            <div class="item">
+                <div class="idx">번호</div>
+                <div class="name">이름</div>
+                <div class="age">나이</div>
+                <div class="gender">성별</div>
+            </div>
+        </div>
+        <div class="items">
+            <div class="item">
+                <div class="idx">1</div>
+                <div class="name">짱구</div>
+                <div class="age">7</div>
+                <div class="gender">남성</div>
+            </div>
+            <div class="item">
+                <div class="idx">2</div>
+                <div class="name">유리</div>
+                <div class="age">7</div>
+                <div class="gender">여성</div>
+            </div>
+            <div class="item">
+                <div class="idx">3</div>
+                <div class="name">철수</div>
+                <div class="age">7</div>
+                <div class="gender">남성</div>
+            </div>
+            <div class="item">
+                <div class="idx">4</div>
+                <div class="name">짱아</div>
+                <div class="age">2</div>
+                <div class="gender">여성</div>
+            </div>
+            <div class="item">
+                <div class="idx">5</div>
+                <div class="name">수지</div>
+                <div class="age">8</div>
+                <div class="gender">여성</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const itemList = Array.from(document.querySelectorAll('.items > .item'))
+        const boxList = document.querySelectorAll('#filter input[type="checkbox"]')
+        
+        function handler(event) {
+            // 1) checked 된 checkbox 의 name으로만 구성된 배열
+            const checkedBoxArray = Array.from(document.querySelectorAll
+            ('#filter input[type="checkbox"]:checked')).map(e => e.name)
+            console.log(checkedBoxArray)
+
+            // 2) item 중에서 gender의 innerText가 checkedBoxArray에 포함되지 않는 요소
+            const result = itemList.filter(data => checkedBoxArray.includes
+            (data.querySelector('.gender').innerText) == false)
+            console.log(result.map(e => e.querySelector('.name').innerText))
+
+            itemList.forEach(data => data.classList.remove('hidden'))   // 모든 item에서 hidden 을 제거한다
+
+            if(result.length == itemList.length) {  // 모든 체크박스가 체크되지 않았다면
+                return                              // 필터링 중단 (모든 요소를 다시 보여준다)
+            }
+            result.forEach(data => data.classList.add('hidden'))    // 3) 숨겨야 할 요소를 hidden으로 처리한다
+        }
+
+        boxList.forEach(box => box.onchange = handler)
+    </script>
+
+</body>
+</html>
