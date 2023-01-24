@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice.html</title>
+    <style>
+        #root {
+            border: 1px solid black;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .coffee {
+            font-size: bold;
+            border: 1px solid gray;
+            display: flex;
+        }
+        .coffee > div {
+            padding: 5px 10px;
+            flex: 1;
+        }
+        .coffee > div:not(div.name) {
+            flex: 0.5;
+        }
+        .coffee > div.name {
+            flex: 2;
+        }
+        .header {
+            background-color: skyblue;
+        }
+        .header > div:hover {
+            background-color: plum;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .header {
+            font-size: 19px;
+            border: 1px solid gray;
+            display: flex;
+        }
+        .header > div {
+            padding: 5px 10px;
+            flex:  1;
+        }
+        .header > div:not(div.name) {
+            flex: 0.5;
+        }
+        .header > div.name {
+            flex: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>객체정렬.연습</h1>
+    <hr>
+
+    <div id="root">
+        <div class="header">
+            <div class="idx">no.</div>
+            <div class="name">제품명</div>
+            <div class="price">가격</div>
+            <div class="grade">등급</div>
+        </div>
+    </div>
+
+    <script>
+        const root = document.getElementById('root')
+
+        const arr = [
+            {
+                idx: 1,
+                name: '에스프레소',
+                price: 3000,
+                grade: 4.8
+            },
+            {
+                idx: 2,
+                name: '아이스 아메리카노',
+                price: 4500,
+                grade: 4.4
+            },
+            {
+                idx: 3,
+                name: '카페라떼',
+                price: 4500,
+                grade: 3.9
+            },
+            {
+                idx: 4,
+                name: '카푸치노',
+                price: 4800,
+                grade: 3.3
+            },
+            {
+                idx: 5,
+                name: '모카라떼',
+                price: 4700,
+                grade: 4.8
+            },
+            {
+                idx: 6,
+                name: '카라멜 마키아또',
+                price: 5300,
+                grade: 4.9
+            }
+        ]
+        console.log(arr)
+
+        arr.forEach(dto => {
+            const coffee = document.createElement('div')
+
+            const idx = `<div class="idx">${dto.idx}</div>`
+            const name = `<div class="name">${dto.name}</div>`
+            const price = `<div class="price">${dto.price}</div>`
+            const grade = `<div class="grade">${dto.grade}</div>`
+
+            coffee.className = 'coffee'
+            coffee.innerHTML += idx
+            coffee.innerHTML += name
+            coffee.innerHTML += price
+            coffee.innerHTML += grade
+
+            root.appendChild(coffee)
+        })
+    </script>
+
+    <script>
+        const headerList = document.querySelectorAll('.header > div')
+        const dataList = Array.from(document.querySelectorAll('.coffee'))
+        console.log(dataList)
+
+        headerList.forEach(div => div.setAttribute('asc', 1))
+
+        function handler(event) {
+            const order = event.target.className
+            console.log(order)
+
+            const asc = +event.target.getAttribute('asc')
+            event.target.setAttribute('asc', -asc)
+
+            dataList.sort((a, b) => {
+                const aa = a.querySelector('.' + order).innerText
+                const bb = b.querySelector('.' + order).innerText
+
+                const flag = (order == 'name') ? (aa > bb) : (+aa > +bb)
+                const ret = flag ? 1 : -1
+                return ret * asc
+            })
+            dataList.forEach(data => root.appendChild(data))
+        }
+        headerList.forEach(e => e.onclick = handler)
+
+    </script>
+
+    
+</body>
+</html>

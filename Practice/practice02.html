@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice02.html</title>
+    <style>
+        #root {
+            border: 2px solid black;
+            width: 500px;
+        }
+        .list {
+            display: flex;
+        }
+        .list > div {
+            padding: 5px 10px;
+            border: 1px solid black;
+            flex: 1;
+        }
+        .product_item {
+            display: flex;
+        }
+        .product_item > div {
+            padding: 5px 10px;
+            border: 1px solid grey;
+            flex: 1;
+        }
+        .column {
+            background-color: salmon;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>필터</h1>
+    <hr>
+
+    <div id="filter">
+        <p>
+            <label><input type="checkbox" name="삼성">삼성</label>
+            <label><input type="checkbox" name="애플">애플</label>
+        </p>
+    </div>
+
+    <div id="root">
+        <div class="column">
+            <div class="list">
+                <div class="idx">no.</div>
+                <div class="product">제품</div>
+                <div class="price">가격</div>
+                <div class="brand">브랜드</div>
+            </div>
+        </div>
+        <div class="product_List">
+            <div class="product_item">
+                <div class="idx">1</div>
+                <div class="product">갤럭시 one</div>
+                <div class="price">598000</div>
+                <div class="brand">삼성</div>
+            </div>
+            <div class="product_item">
+                <div class="idx">2</div>
+                <div class="product">갤럭시 two</div>
+                <div class="price">698000</div>
+                <div class="brand">삼성</div>
+            </div>
+            <div class="product_item">
+                <div class="idx">3</div>
+                <div class="product">갤럭시 three</div>
+                <div class="price">798000</div>
+                <div class="brand">삼성</div>
+            </div>
+            <div class="product_item">
+                <div class="idx">4</div>
+                <div class="product">갤럭시 four</div>
+                <div class="price">898000</div>
+                <div class="brand">삼성</div>
+            </div>
+            <div class="product_item">
+                <div class="idx">5</div>
+                <div class="product">아이폰4</div>
+                <div class="price">798000</div>
+                <div class="brand">애플</div>
+            </div>
+            <div class="product_item">
+                <div class="idx">6</div>
+                <div class="product">아이폰5</div>
+                <div class="price">998000</div>
+                <div class="brand">애플</div>
+            </div>
+            <div class="product_item">
+                <div class="idx">7</div>
+                <div class="product">아이폰6</div>
+                <div class="price">1098000</div>
+                <div class="brand">애플</div>
+            </div>
+            <div class="product_item">
+                <div class="idx">8</div>
+                <div class="product">아이폰7</div>
+                <div class="price">1090000</div>
+                <div class="brand">애플</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const itemList = Array.from(document.querySelectorAll('.product_List > .product_item'))
+        const boxList = document.querySelectorAll('#filter input[type="checkbox"]')
+        console.log(itemList)
+        console.log(boxList)
+
+        function handler(event) {
+            const checkedBoxArray = Array.from(document.querySelectorAll
+            ('#filter input[type="checkbox"]:checked')).map(e => e.name)
+            console.log(checkedBoxArray)
+
+            const result = itemList.filter(data => checkedBoxArray.includes
+            (data.querySelector('.brand').innerText) == false)
+            console.log(result.map(e => e.querySelector('.product').innerText))
+
+            itemList.forEach(data => data.classList.remove('hidden'))
+
+            if(result.length == itemList.length) {
+                return
+            }
+            result.forEach(data => data.classList.add('hidden'))
+        }
+        boxList.forEach(box => box.onchange = handler)
+    </script>
+
+    <script>
+        const headerList = document.querySelectorAll('.list > div')
+        const dataList = Array.from(document.querySelectorAll('.product_item'))
+        console.log(dataList)
+        console.log(headerList)
+
+        headerList.forEach(div => div.setAttribute('asc', 1))
+
+        function handler(event) {
+            const order = event.target.className
+            console.log(order)
+
+            const asc = +event.target.getAttribute('asc')
+            event.target.setAttribute('asc', -asc)
+
+            dataList.sort((a, b) => {
+                const aa = a.querySelector('.' + order).innerText
+                const bb = b.querySelector('.' + order).innerText
+
+                const flag = (order == 'product' || order == 'brand') ? (aa > bb) : (+aa > +bb)
+                const ret = flag ? 1 : -1
+                return ret * asc
+            })
+            dataList.forEach(data => root.appendChild(data))
+        }
+        headerList.forEach(e => e.onclick = handler)
+
+
+    </script>
+    
+</body>
+</html>

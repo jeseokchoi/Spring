@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice03.html</title>
+    <style>
+        #root {
+            border: 2px solid black;
+        }
+        .wrap {
+            display: flex;
+        }
+        .left {
+            flex: 1;
+            padding: 10px;
+            overflow: scroll;
+            font-size: 20px;
+        }
+        .left p label {
+            user-select: none;
+        }
+        .left p input[type="checkbox"] {
+            margin-right: 20px;
+        }
+        .right {
+            flex: 4;
+            padding: 10px;
+        }
+        #column {
+            background-color: skyblue;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+        #items {
+            height: 80vh;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .item {
+            display: flex;
+        }
+        #items > .item:hover {
+            background-color: #eee;
+            cursor: pointer;
+        }
+        .item > div {
+            flex: 1;
+            padding: 5px 10px;
+            border: 1px solid black;
+        }
+        .item > div:first-child {
+            flex: 3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>정렬 및 필터연습</h1>
+    <hr>
+    <div id="root">
+        <div class="wrap">
+            <div class="left">
+                <fieldset>
+                    <p><label><input type="checkbox" name="priceFilter" value="0">
+                        <span>0 ~ 10,000</span></span></label>
+                    </p>
+                    <p><label><input type="checkbox" name="priceFilter" value="1">
+                        <span>10,000 ~ </span></span></label>
+                    </p>
+                    <p><label><input type="checkbox" name="priceFilter" value="2">
+                        <span>20,000 ~ </span></span></label>
+                    </p>
+                    <p><label><input type="checkbox" name="priceFilter" value="3">
+                        <span>30,000 ~ </span></span></label>
+                    </p>
+                    <p><label><input type="checkbox" name="priceFilter" value="4">
+                        <span>40,000 ~ </span></span></label>
+                    </p>
+                    <p><label><input type="checkbox" name="priceFilter" value="5">
+                        <span>50,000 ~ </span></span></label>
+                    </p>
+                </fieldset>
+            </div>
+            <div class="right">
+                <div id="column">
+                    <div class="item">
+                        <div class="name">이름</div>
+                        <div class="price">가격</div>
+                        <div class="salePrice">할인가격</div>
+                        <div class="salesCount">누적판매량</div>
+                        <div class="grade">점수</div>
+                        <div class="reviewCount">리뷰수</div>
+                    </div>
+                </div>
+                <div id="items"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="03_js"></script>
+    <script>
+        const items = document.getElementById('items')
+
+        dataList.forEach(data => {
+            const item = `
+            <div class="item">
+                <div class="name">${data.name}</div>
+                <div class="price">${data.price}</div>
+                <div class="salePrice">${data.salePrice}</div>
+                <div class="salesCount">${data.salesCount}</div>
+                <div class="grade">${data.grade}</div>
+                <div class="reviewCount">${data.reviewCount}</div>
+            </div>`
+            items.innerHTML += item
+        })
+    </script>
+    <script>
+        const itemList = Array.from(document.querySelectorAll('#items > .item'))
+        const boxList = document.querySelectorAll('.left input[type="checkbox"]')
+        console.log(itemList)
+        console.log(boxList)
+
+        function handler(event) {
+            const checkedBoxArray = Array.from(document.querySelectorAll
+            ('.left input[type="checkbox"]:checked')).map(e => +e.value)
+            console.log(checkedBoxArray)
+
+            const result = itemList.filter(data => checkedBoxArray.includes
+            (Math.floor(data.querySelector('.salePrice').innerText /10000))== false)
+            console.log(result.map(e => e.querySelector('.name').innerHTML))
+
+            itemList.forEach(data => data.classList.remove('hidden'))
+
+            if(result.length == itemList.length) {
+                return
+            }
+            result.forEach(data => data.classList.add('hidden'))
+            console.log(result)
+        }
+        boxList.forEach(box => box.onchange = handler)
+    </script>
+
+    <script>
+        const headerList = document.querySelectorAll('.right > #column > .item > div')
+        const targetList = Array.from(document.querySelectorAll('.right > #items >.item'))
+        console.log(headerList)
+        console.log(targetList)
+
+        headerList.forEach(div => div.setAttribute('asc', 1))
+
+        function handler(event) {
+            const order = event.target.className
+            console.log(order)
+
+            const asc = +event.target.getAttribute('asc')
+            event.target.setAttribute('asc', -asc)
+
+            targetList.sort((a, b) => {
+                const aa = a.querySelector('.' + order).innerText
+                const bb = b.querySelector('.' + order).innerText
+
+                const flag = (order == 'name') ? (aa > bb) : (+aa > +bb)
+                const ret = flag ? 1 : -1
+                return ret * asc
+            })
+            targetList.forEach(item => items.appendChild(item))
+        }
+        headerList.forEach(e => e.onclick = handler)
+    </script>
+    
+</body>
+</html>
