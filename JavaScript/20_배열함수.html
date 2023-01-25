@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20_배열함수.html</title>
+</head>
+<body>
+
+    <h1>20_배열함수.html</h1>
+    <hr>
+
+    <script>
+        const arr = [2, 7, 8, 4, 6]
+
+        // arr.반복함수(콜백함수)
+
+        // 제어문 for와 유사하다 (콜백의 반환형은 void로 생각하자)
+        // arr.forEach(element => {...})                // element만으로 반복하기
+        // arr.forEach((element, index) => {...})       // element와 index를 이용하여 반복하기
+        arr.forEach(element => console.log('forEach :', element))
+
+        // element를 이용하여 새로운 값으로 구성된 배열을 만든다
+        // element가 객체라면 객체의 특정 속성만으로 구성할 수도 있다
+        // (콜백의 반환형은 object로 생각하자)
+        // arr.map(element => { return element * 10 })   // 각 원소에 10을 곱한 값으로 새 배열 만들기
+        console.log('map :', arr.map(element => element * 10))
+        
+        // element가 특정 조건에 만족한다면 남겨서 새로운 배열을 구성한다
+        // (콜백의 반환형은 boolean 으로 생각하자)
+        // arr.filter(element => { return element % 2 == 0 })   // 짝수만 남겨서 새 배열 만들기
+        console.log('filter :', arr.filter(element => element % 2 == 0))
+
+        // a와 b를 이용하여 크기 비교 후 정수를 반환한다
+        // (콜백의 반환형은 int로 생각하자)
+        // arr.sort((a, b)) => { return a > b ? 1 : -1 })   // 비교하여 오름차순으로 정렬 (기존 배열이 변경됨)
+        arr.sort((a, b) => a > b ? 1 : -1)
+        console.log('sort :', arr)
+    </script>
+    
+</body>
+</html>

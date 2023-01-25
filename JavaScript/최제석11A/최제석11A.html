@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최제석11A.HTML</title>
+    <link rel="stylesheet" href="css/최제석11A.css">
+</head>
+<body>
+
+    <div id="root">
+        <div class="wrap">
+            <div class="left">
+                <fieldset id="filter">
+                    <legend>Team</legend> 
+                        <p><label><input type="checkbox" name="team" value="레드">레드</label></p>
+                        <p><label><input type="checkbox" name="team" value="블루">블루</label></p>             
+                </fieldset>
+                <fieldset id="filter_kill">
+                    <legend>Average</legend>
+                        <p><label><input type="checkbox" name="point" value="0">킬</label></p>
+                        <p><label><input type="checkbox" name="point" value="1">데스</label></p>
+                </fieldset>
+            </div>
+            <div class="right">
+                <div id="column">
+                    <div class="user">
+                        <div class="user">ID</div>
+                        <div class="champion">챔피언</div>
+                        <div class="team">팀</div>
+                        <div class="kill">킬</div>
+                        <div class="death">데스</div>
+                        <div class="assist">어시스트</div>
+                        <div class="damage">데미지</div>
+                        <div class="cs">CS</div>
+                    </div>
+                </div>
+                <div id="user_data"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="20.js"></script>
+    <script>
+        const userDB = document.getElementById('user_data')
+
+        dataList.forEach(data => {
+            const user = `
+            <div class="userDB">
+                <div class="user">${data.user}</div>
+                <div class="champion">${data.champion}</div>
+                <div class="team">${data.team}</div>
+                <div class="kill">${data.kill}</div>
+                <div class="death">${data.death}</div>
+                <div class="assist">${data.assist}</div>
+                <div class="damage">${data.damage}</div>
+                <div class="cs">${data.cs}</div>
+            </div>`
+            userDB.innerHTML += user
+        })
+    </script>
+
+    <!-- 팀필터 -->
+    <script>
+        const userList = Array.from(document.querySelectorAll('.right > #user_data > .userDB'))
+        const checkList = document.querySelectorAll('#filter input[type="checkbox"]')
+        console.log(userList)
+        console.log(checkList)
+
+        function handler(event) {
+            const otherCheckBoxArray = Array.from(document.querySelectorAll('input[name="point"]:checked'))
+            const checkedBoxArray = Array.from(document.querySelectorAll
+            ('#filter input[type="checkbox"]:checked')).map(e => e.value)
+            console.log(checkedBoxArray)
+
+            const result = userList.filter(data => checkedBoxArray.includes
+            (data.querySelector('.team').innerText) == false)
+
+            userList.forEach(data => data.classList.remove('hidden'))
+            if(otherCheckBoxArray.length > 0){
+                otherCheckBoxArray.forEach(e => e.checked = '')
+            }
+
+            if(result.length == userList.length) {
+                return
+            }
+            result.forEach(data => data.classList.add('hidden'))
+        }
+        checkList.forEach(check => check.onchange = handler)
+    </script>
+
+    <!-- 킬필터 -->
+    <script>
+        const userList1 = Array.from(document.querySelectorAll('#user_data > .userDB'))
+        const boxList = document.querySelectorAll('#filter_kill input[type="checkbox"]')
+        console.log(userList1)
+        console.log(boxList)
+        
+        function handler1(event) {
+            const otherCheckBoxArray1 = Array.from(document.querySelectorAll('input[name="team"]:checked'))
+            const checkedBoxArray = Array.from(document.querySelectorAll
+            ('#filter_kill input[type="checkbox"]:checked')).map(e => e.value)
+            console.log(checkedBoxArray)
+
+            const result = userList1.filter(data => checkedBoxArray.includes
+            (data.querySelector('.kill').innerText) == false)
+            console.log(result.map(e => e.querySelector('.kill').innerText))
+            
+            userList1.forEach(data => data.classList.remove('hidden'))
+            if(otherCheckBoxArray1.length > 0){
+                otherCheckBoxArray1.forEach(e => e.checked = '')
+            }
+            
+            if(result.length == userList1.length) {
+                return
+            }
+            result.forEach(data => data.classList.add('hidden'))
+            console.log(result)
+        }
+        boxList.forEach(box => box.onchange = handler1)
+    </script>
+
+    <!-- 팀정렬 -->
+    <script>
+        const headerList = document.querySelectorAll('.right > #column > .user > div')
+        const targetList = Array.from(document.querySelectorAll('.right > #user_data > .userDB'))
+        console.log(headerList)
+        console.log(targetList)
+
+        headerList.forEach(div => div.setAttribute('asc', 1))
+
+        function handler(event) {
+            const order = event.target.className
+            console.log(order)
+
+            const asc = +event.target.getAttribute('asc')
+            event.target.setAttribute('asc', -asc)
+
+            targetList.sort((a, b) => {
+                const aa = a.querySelector('.' + order).innerText
+                const bb = b.querySelector('.' + order).innerText
+
+                const flag = (order == 'user' || order == 'champion' || order == 'team') ? (aa > bb) : (+aa > +bb)
+                const ret = flag ? 1 : -1
+                return ret * asc
+            })
+            targetList.forEach(user => userDB.appendChild(user))
+        }
+        headerList.forEach(e => e.onclick = handler)
+    </script>
+
+    <!-- 팀색상 -->
+    <script>
+        const dataArray = Array.from(document.querySelectorAll('#user_data >.userDB'))
+        dataArray.forEach(data => {
+            if(data.querySelector('.team').innerText == '블루') {
+                data.style.background = 'skyblue'
+            }
+            else {
+                data.style.background = 'lightpink'
+            }
+        })
+    </script>
+
+    
+</body>
+</html>

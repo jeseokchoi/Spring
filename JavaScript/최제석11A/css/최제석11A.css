@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+#root {
+    width: 1080px;
+    margin: 50px auto;
+}
+#column {
+    background-color: black;
+    color: gold;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.wrap {
+    display: flex;
+}
+.left {
+    border: 2px solid black;
+    flex: 1;
+    padding: 10px;
+    overflow: scroll;
+    font-size: 15px;
+    margin-right: 10px;
+    height: -webkit-fill-available;
+}
+#filter_kill {
+    margin-top: 10px;
+}
+.left p label {
+    user-select: none;
+}
+.left p input[type="checkbox"] {
+    margin-right: 20px;
+}
+.right {
+    flex: 4;
+    padding: 10px;
+    border: 2px solid black;
+}
+#column > .user {
+    display: flex;
+}
+.user > div {
+    padding: 5px 10px;
+    border: 1px solid white;
+    flex: 1;
+}
+#user_data {
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.userDB {
+    display: flex;
+}
+#items > .userDB:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+.userDB > div {
+    flex: 1;
+    padding: 10px 10px;
+    border: 1px solid gray;
+}
+.hidden {
+    display: none;
+}
