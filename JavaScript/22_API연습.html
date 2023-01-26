@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22_API연습.html</title>
+</head>
+<body>
+
+    <h1>22_API연습.html</h1>
+    <hr>
+
+    <script>
+        const url = 'https://apis.data.go.kr/6260000/AttractionService/getAttractionKr?serviceKey=K7G5hCA%2FRqnmALDK%2F7POZXDGSgTgQFRIcOqpF8HUf9rqLn17QSaJ4Q0Ox732h%2BF%2FgxuyB3bXrdEWApNVwrOtWA%3D%3D&pageNo=1&numOfRows=10&resultType=json'
+        fetch(url)
+        .then(resp => resp.json())
+        .then(json => {
+            // console.log(json.getAttractionKr.item)
+            const arr = json.getAttractionKr.item
+            console.log(arr)
+        })
+    </script>
+    
+</body>
+</html>
