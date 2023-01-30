@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24_차트.html</title>
+    <style>
+        #root{
+            max-width: 1800px;
+            margin: auto;
+            width: 950px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    
+    <h1>부산광역시 행정구역별 인구 및 토지 평당가격</h1>
+    <hr>
+
+    <div id="root">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        const arr = [
+            {location: '강서구',   population: 144071, pricePerSquareMeter: 2.4},
+            {location: '중구',     population: 40342,  pricePerSquareMeter: 1.0},
+            {location: '북구',     population: 280268, pricePerSquareMeter: 2.3},
+            {location: '금정구',   population: 223713, pricePerSquareMeter: 3.1},
+            {location: '기장군',   population: 177672, pricePerSquareMeter: 2.2},
+            {location: '서구',     population: 104755, pricePerSquareMeter: 2.8},
+            {location: '동래구',   population: 274769, pricePerSquareMeter: 3.4},
+            {location: '사하구',   population: 304583, pricePerSquareMeter: 2.3},
+            {location: '사상구',   population: 205287, pricePerSquareMeter: 1.7},
+            {location: '영도구',   population: 109327, pricePerSquareMeter: 1.5},
+            {location: '부산진구', population: 351436, pricePerSquareMeter: 4.4},
+            {location: '해운대구', population: 390782, pricePerSquareMeter: 5.5},
+            {location: '연제구',   population: 205895, pricePerSquareMeter: 3.0},
+            {location: '수영구',   population: 174709, pricePerSquareMeter: 4.8},
+            {location: '남구',     population: 259135, pricePerSquareMeter: 4.3},
+            {location: '동구',     population: 87851,  pricePerSquareMeter: 2.4}
+        ]
+        console.log(arr.length)
+
+        // arr.sort((a, b) => a.pricePerSquareMeter > b.pricePerSquareMeter ? 1 : -1)
+        arr.sort((a, b) => a.population > b.population ? 1 : -1)
+
+        const context = document.getElementById('myChart')
+
+        const labels = arr.map(e => e.location)
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: '지역별 인구 수',
+                    data: arr.map(e => e.population),
+                    backgroundColor: 'lightpink'
+                },
+                {
+                    label: '지역별 평당가격(천)',
+                    data: arr.map(e => e.pricePerSquareMeter * 100000),
+                    backgroundColor: 'lightskyblue'
+                }
+            ]
+        }
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {}
+        }
+        const myChart = new Chart(context, config)
+
+
+    </script>
+    
+
+</body>
+</html>

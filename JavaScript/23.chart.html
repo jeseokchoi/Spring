@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23_chart.html</title>
+    <style>
+        #root{
+            max-width: 1800px;
+            margin: auto;
+            width: 500px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h1>23_chart - 간단 데이터 차트로 나타내기</h1>
+    <hr>
+
+    <div id="root">
+        <canvas id="myChart"></canvas>
+    </div>
+    
+    <script>
+        // 1) context 객체 생성
+        const context = document.getElementById('myChart').getContext('2d')
+
+        // 2) labels -> data -> config -> chart
+        const labels = ['이지은', '문상훈', '나단비']
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: '나이',
+                data: [30, 33, 5]
+            }]
+        }
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {}
+        }
+
+        const myChart = new Chart(context, config)
+    </script>
+
+</body>
+</html>
