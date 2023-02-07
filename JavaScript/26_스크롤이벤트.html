@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤이벤트</title>
+    <style>
+        .root {
+            width: 500px;
+            height: 700px;      /* 높이 고정 */
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px;
+            overflow-y: scroll; /* y축(세로) 스크롤바를 강제로 생성함 */
+            overflow-x: hidden; /* x축(가로) 스크롤바 숨김 */
+        }
+        .item {
+            margin: 20px auto;
+            padding: 10px;
+            width: 300px;
+            height: 200px;
+            background-color: burlywood;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>26_스크롤이벤트.html</h1>
+    <hr>
+
+    <div class="root">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+
+    <script>
+        const root = document.querySelector('.root')
+
+        function scrollHandler(event) {
+            const ob = {
+                scrollTop: event.target.scrollTop,          // 현재 스크롤 상단 위치
+                clientHeight: event.target.clientHeight,    // 브라우저에 표현되는 높이
+                scrollHeight: event.target.scrollHeight     // 스크롤 가능한 전체 높이
+            }
+            console.log(ob)
+            
+            const currentSize = ob.scrollTop + ob.clientHeight
+            const flag = ob.scrollHeight * 0.95 <= currentSize && currentSize <= ob.scrollHeight * 1.05
+            console.log(flag)
+
+            if(flag) {
+                if(currentSize > 5000){
+                    return
+                }
+                console.log('추가 불러오기')
+                const num = document.querySelector('.item:last-child').innerText
+                for(let i = num + 1; i <  num + 6; i++) {
+                    const tag = `<div class="item">${i}</div>`
+                    root.innerHTML += tag
+                }
+            }
+        }
+        root.onscroll = scrollHandler
+
+    </script>
+
+</body>
+</html>

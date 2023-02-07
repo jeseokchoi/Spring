@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form>
+        <input type="text" name="n1" value="10">
+        <input type="text" name="n2" value="20">
+    </form>
+    
+    <script>
+        const formData = new FormData(document.forms[0])
+
+        const keys = formData.keys()
+        console.log(keys.next())
+        console.log(keys.next())
+
+        const values = formData.values() 
+        console.log(values.next())
+        console.log(values.next())
+
+        const entries = formData.entries()
+        console.log(entries.next().value)
+        console.log(entries.next().value)
+    </script>
+
+</body>
+</html>
