@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29_정규식예제.html</title>
+</head>
+<body>
+
+    <h1>29_정규식예제.html</h1>
+    <hr>
+
+    <fieldset>
+        <h3>정수 4 ~ 8자리</h3>
+        <input type="text" name="t1">
+        <span class="m1"></span>
+    </fieldset>
+
+    <fieldset>
+        <h3>대소문자 및 숫자구성 6 ~ 12자리</h3>
+        <input type="text" name="t2">
+        <span class="m2"></span>
+    </fieldset>
+    
+    <fieldset>
+        <h3>대소문자 및 숫자조합(특수문자 포함)6 ~ 12자리</h3>
+        <input type="text" name="t3">
+        <span class="m3"></span>
+    </fieldset>
+
+    <script>
+        const t1 = document.querySelector('input[name="t1"]')
+        const m1 = document.querySelector('span.m1')
+        t1.onkeyup = function(event) {
+            const value = event.target.value        // 문자열
+            const exp = /^[0-9]{4,8}$/             // 정규식 조건
+            console.log(value.match(exp))           // 문자열이 조건에 부합하는가? (아니면 null)
+            if(value.match(exp) == null){
+                m1.innerText = '4~6자리의 정수로 구성되어야 합니다'
+                m1.style.color = 'red'
+            }
+            else{
+                m1.innerText = '사용가능합니다'
+                m1.style.color = '#269139'
+            }
+        }
+
+    </script>
+
+    <script>
+        const t2 = document.querySelector('input[name="t2"]')
+        const m2 = document.querySelector('span.m2')
+
+        function passwordCheck1(event) {
+            const exp = /^[A-Za-z0-9]{6,12}$/
+            if(event.target.value.match(exp) == null) {
+                m2.innerText = '대소문자 및 숫자의 6~12자리 구성이어야 합니다'
+                m2.style.color = 'red'
+            }
+            else {
+                m2.innerText = 'use it'
+                m2.style.color = "#269139"
+            }
+        }
+        t2.onkeyup = passwordCheck1
+    </script>
+    
+    <script>
+        const t3 = document.querySelector('input[name="t3"]')
+        const m3 = document.querySelector('span.m3')
+
+        function passwordCheck2(event) {
+            const exp = /^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[!@#$%^&*]).{8,}$/
+            if(event.target.value.match(exp) == null) {
+                m3.innerText = '대소문자 및 숫자의 6~12자리 구성이어야 합니다'
+                m3.style.color = 'red'
+            }
+            else {
+                m3.innerText = 'use it'
+                m3.style.color = "#269139"
+            }
+        }
+        t3.onkeyup = passwordCheck2
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>키 이벤트</h1>
+    <hr>
+
+    <p>
+        <input type="text" name="n1" placeholder="값 입력">
+    </p>
+
+    <p>
+        <input type="text" name="n2" readonly>
+    </p>
+
+    <script>
+        const n1 = document.querySelector('input[name="n1"]')
+
+        function handler(event) {
+            const n2 = document.querySelector('input[name="n2"]')
+            n2.value = event.target.value
+            console.log(event.key)
+        }
+
+        // n1.onkeypress = handler
+        n1.onkeyup = handler
+        // n1.onkeydown = handler
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #slider {
+            width: 400px;
+            margin: 50px auto;
+            border: 1px solid black;
+        }
+        .wrap {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+        }
+        .item {
+            box-sizing: border-box;
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            line-height: 300px;
+            text-align: center;
+            font-size: 40px;
+            transition-duration: 1.2s;
+        }
+        .item:nth-child(5n + 1) { background-color: lightpink;}
+        .item:nth-child(5n + 2) { background-color: lightgoldenrodyellow;}
+        .item:nth-child(5n + 3) { background-color: lightgreen;}
+        .item:nth-child(5n + 4) { background-color: lightskyblue;}
+        .item:nth-child(5n + 0) { background-color: plum;}
+    </style>
+</head>
+<body>
+    
+    <div id="slider">
+        <div class="wrap">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+        </div>
+    </div>
+
+    <script>
+        const arr = Array.from(document.querySelectorAll('.item'))
+        function slider() {
+            arr[0].style.opacity = 0
+            arr[0].style.left = '-800px'
+            arr[1].style.left = '-400px'
+            arr[2].style.left = '0px'
+            arr[3].style.left = '400px'
+            arr[4].style.left = '800px'
+            arr[3].style.opacity = 1
+            arr.push(arr.shift())
+        }
+        for(let i = 0; i < 4; i++) {
+            slider()
+        }
+        setInterval(slider, 2000)
+    </script>
+
+</body>
+</html>

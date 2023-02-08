@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>28_패스워드검증.html</title>
+</head>
+<body>
+
+    <h1>패스워드 검증</h1>
+    <hr>
+
+    <p>
+        <input type="password" name="pw1" placeholder="비밀번호를 입력하세요">
+        <span class="pw1_message"></span>
+    </p>
+    <p>
+        <input type="password" name="pw2" placeholder="비밀번호 일치">
+        <span class="pw2_message"></span>
+    </p>
+
+    <script>
+        const pw1 = document.querySelector('input[name="pw1"]')
+        const pw2 = document.querySelector('input[name="pw2"]')
+        const pw1_message = document.querySelector('.pw1_message')
+        const pw2_message = document.querySelector('.pw2_message')
+
+        function pw1Handler(event) {
+            const pw1value = event.target.value
+            if(pw1value.length < 8) {
+                pw1_message.innerText = '길이는 8자 이상이여야 합니다'
+                pw1_message.style.color = 'red'
+            }
+            else {
+                pw1_message.innerText = '사용ㄱㄱ'
+                pw1_message.style.color = '#269139'
+            }
+        }
+        function pw2Handler(event) {
+            const pw1value = document.querySelector('input[name="pw1"]').value
+            const pw2value = event.target.value
+            if(pw1value != pw2value) {
+                pw2_message.innerText = '비밀번호가 일치하지 않습니다'
+                pw2_message.style.color = 'red'
+            }
+            else {
+                pw2_message.innerText = '비밀번호 일치'
+                pw2_message.style.color = '#269139'
+            }
+        }
+
+        pw1.onkeyup = pw1Handler
+        pw2.onkeyup = pw2Handler
+    </script>
+</body>
+</html>
